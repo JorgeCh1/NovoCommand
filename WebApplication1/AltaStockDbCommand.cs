@@ -19,7 +19,7 @@ namespace Datos
         {
             SqlCommand command = new SqlCommand();
             command.Connection = _connection;
-            command.CommandText = "INSERT INTO computers(Marca, Modelo, Procesador, MemoriaRam, Almacenamiento, SistemaOperativo, Cantidad, AltaStock, BajaStock) VALUES(@Marca, @Modelo, @Procesador, @MemoriaRam, @Almacenamiento, @SistemaOperativo, @Cantidad, @AltaStock, @BajaStock)";
+            command.CommandText = "INSERT INTO computadora(Marca, Modelo, Procesador, MemoriaRam, Almacenamiento, SistemaOperativo, Cantidad, AltaStock, BajaStock) VALUES(@Marca, @Modelo, @Procesador, @MemoriaRam, @Almacenamiento, @SistemaOperativo, @Cantidad, @AltaStock, @BajaStock)";
             command.Parameters.AddWithValue("@Marca", _producto.Marca);
             command.Parameters.AddWithValue("@Modelo", _producto.Modelo);
             command.Parameters.AddWithValue("@Procesador", _producto.Procesador);

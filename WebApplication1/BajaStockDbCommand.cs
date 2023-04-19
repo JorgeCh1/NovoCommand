@@ -20,7 +20,7 @@ namespace Datos
         {
             SqlCommand command = new SqlCommand();
             command.Connection = _connection;
-            command.CommandText = "UPDATE computers SET Marca = @Marca, Modelo = @Modelo, Procesador = @Procesador, MemoriaRam = @MemoriaRam, Almacenamiento = @Almacenamiento, SistemaOperativo = @SistemaOperativo, Cantidad = @Cantidad, AltaStock = @AltaStock, BajaStock = @BajaStock WHERE Id = @Id";
+            command.CommandText = "UPDATE computadora SET Marca = @Marca, Modelo = @Modelo, Procesador = @Procesador, MemoriaRam = @MemoriaRam, Almacenamiento = @Almacenamiento, SistemaOperativo = @SistemaOperativo, Cantidad = @Cantidad, AltaStock = @AltaStock, BajaStock = @BajaStock WHERE Id = @Id";
             command.Parameters.AddWithValue("@Marca", _producto.Marca);
             command.Parameters.AddWithValue("@Modelo", _producto.Modelo);
             command.Parameters.AddWithValue("@Procesador", _producto.Procesador);
