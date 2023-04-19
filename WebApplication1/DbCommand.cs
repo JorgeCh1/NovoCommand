@@ -1,6 +1,7 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 
@@ -8,9 +9,9 @@ namespace Datos
 {
     public abstract class DbCommand : OrdenCommand
     {
-        protected MySqlConnection _connection;
+        protected SqlConnection _connection;
 
-        public DbCommand(ProductoReceiver producto, double cantidad, MySqlConnection connection) : base(producto, cantidad)
+        public DbCommand(ProductoReceiver producto, double cantidad, SqlConnection connection) : base(producto, cantidad)
         {
             _connection = connection;
         }

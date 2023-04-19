@@ -1,15 +1,16 @@
 ﻿using MySql.Data.MySqlClient;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 
 namespace Datos
 {
     public class EmpresaInvoker
     {
-        private MySqlConnection _connection;
+        private SqlConnection _connection;
         // Lista de órdenes
         private List<OrdenCommand> ordenes = new List<OrdenCommand>();
 
-        public EmpresaInvoker(MySqlConnection connection)
+        public EmpresaInvoker(SqlConnection connection)
         {
             _connection = connection;
         }

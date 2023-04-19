@@ -7,6 +7,8 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Datos;
 using MySql.Data.MySqlClient;
+using System.Data.SqlClient;
+using System.Data;
 
 namespace Command_Prototype
 {
@@ -14,7 +16,10 @@ namespace Command_Prototype
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            /*if (!IsPostBack)
+            {
+                
+            }*/
         }
 
         protected void Hecho_Click(object sender, EventArgs e)
@@ -23,7 +28,7 @@ namespace Command_Prototype
             var cantidadBaja = Int32.Parse(txtBaja.Text);
 
             // Conexión a la base de datos
-            MySqlConnection connection = new MySqlConnection(ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString);
+            SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["MiConexion"].ConnectionString);
             connection.Open();
 
             //Instancia de la Empresa
@@ -31,14 +36,31 @@ namespace Command_Prototype
             var producto = new ProductoReceiver
             {
                 Cantidad = int.Parse(txtCantidadProducto.Text),
-                Nombre = "Producto"
-            };
+                //Id = Convert.ToInt32(txtId.Text),
+                Marca = txtMarca.Text,
+                Modelo = txtModelo.Text,
+                Procesador = txtProcesador.Text,
+                MemoriaRam = Convert.ToInt32(txtMemoriaRam.Text),
+                Almacenamiento = Convert.ToInt32(txtAlmacenamiento.Text),
+                SistemaOperativo = txtSistemaOperativo.Text,
+                AltaStock = Int32.Parse(txtAlta.Text),
+                BajaStock = Int32.Parse(txtBaja.Text)
+
+        };
 
             var ordenAlta = new AltaStockDbCommand(producto, cantidadAlta, connection);
             empresa.TomarOrden(ordenAlta);
             var ordenBaja = new BajaStockDbCommand(producto, cantidadBaja, connection);
             empresa.TomarOrden(ordenBaja);
             empresa.ProcesarOrdenes();
+
+            var query = "SELECT * FROM computers";
+            var adapter = new SqlDataAdapter(query, connection);
+            var dataTable = new DataTable();
+
+            // Mostrar datos en el GridView
+            gridProductos.DataSource = dataTable;
+            gridProductos.DataBind();
 
             // Cierre de la conexión a la base de datos
             connection.Close();
@@ -50,32 +72,6 @@ namespace Command_Prototype
             // Imprime la cantidad disponible del producto
             lblResultado.Text = $"Total de computadoras es { producto.Cantidad }";
             lblResultado.Visible = true;
-
-
-        }
-
-        protected void BajaStock_Click(object sender, EventArgs e)
-        {
-            //var cantidad = Int32.Parse(txtAltayBaja.Text);
-
-
-
-            ///*// Instancia empresa
-            //var empresa = new EmpresaInvoker();
-            //*/
-            //// Instancia producto
-            //var producto = new ProductoReceiver();
-            //producto.Cantidad = producto.Cantidad;
-
-            //var ordenBaja = new BajaStockCommand(producto, cantidad);
-            //empresa.TomarOrden(ordenBaja);
-            ////empresa.ProcesarOrdenes();
-
-            //lblBajaStok.Text = $"Quitando { cantidad } de Computadoras";
-            //lblBajaStok.Visible = true;
-            //// Imprime la cantidad disponible del producto
-            //lblResultado.Text = $"Total de computadoras es { producto.Cantidad }";
-            //lblResultado.Visible = true;
 
 
         }

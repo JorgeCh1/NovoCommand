@@ -1,6 +1,41 @@
 ﻿<%@ Page Title="Contact" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Contact.aspx.cs" Inherits="Command_Prototype.Contact" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
+     <asp:HiddenField ID="hfId" runat="server" />
+    <asp:HiddenField ID="hfModo" runat="server" />
+
+    <asp:Label ID="lblMarca" runat="server" Text="Marca"></asp:Label>
+    <asp:TextBox ID="txtMarca" runat="server"></asp:TextBox>
+    <asp:RequiredFieldValidator ID="rfvMarca" runat="server" ControlToValidate="txtMarca" ErrorMessage="Campo marca está vació" Display="Dynamic" ForeColor="Red" ValidationGroup="AgregarComputadora" />
+    
+    <br />
+    <asp:Label ID="lblModelo" runat="server" Text="Modelo"></asp:Label>
+    <asp:TextBox ID="txtModelo" runat="server"></asp:TextBox>
+    <asp:RequiredFieldValidator ID="rfvModelo" runat="server" ControlToValidate="txtModelo" ErrorMessage="Campo Modelo está vació" Display="Dynamic" ForeColor="Red" ValidationGroup="AgregarComputadora" />
+    
+    <br />
+    <asp:Label ID="lblProcesador" runat="server" Text="Procesador"></asp:Label>
+    <asp:TextBox ID="txtProcesador" runat="server"></asp:TextBox>
+    <asp:RequiredFieldValidator ID="rfvProcesador" runat="server" ControlToValidate="txtProcesador" ErrorMessage="Campo Procesador está vació" Display="Dynamic" ForeColor="Red" ValidationGroup="AgregarComputadora" />
+    
+    <br />
+    <asp:Label ID="lblMemoriaRam" runat="server" Text="Memoria RAM"></asp:Label>
+    <asp:TextBox ID="txtMemoriaRam" runat="server"></asp:TextBox>
+    <asp:RequiredFieldValidator ID="rfvMemoriaRam" runat="server" ControlToValidate="txtMemoriaRam" ErrorMessage="Campo Memoria RAM está vació" Display="Dynamic" ForeColor="Red" ValidationGroup="AgregarComputadora" />
+    <asp:RangeValidator ID="rvMemoriaRam" runat="server" ControlToValidate="txtMemoriaRam" ErrorMessage="Solo se aceptan números enteros de 1 a 32768" Display="Dynamic" ForeColor="Red" MinimumValue="1" MaximumValue="32768" Type="Integer" ValidationGroup="AgregarComputadora"  />
+
+    <br />
+    <asp:Label ID="lblAlmacenamiento" runat="server" Text="Almacenamiento"></asp:Label>
+    <asp:TextBox ID="txtAlmacenamiento" runat="server"></asp:TextBox>
+    <asp:RequiredFieldValidator ID="rfvAlmacenamiento" runat="server" ControlToValidate="txtAlmacenamiento" ErrorMessage="Campo Almacenamiento está vació" Display="Dynamic" ForeColor="Red" ValidationGroup="AgregarComputadora" />
+    <asp:RangeValidator ID="rvAlmacenamiento" runat="server" ControlToValidate="txtAlmacenamiento" ErrorMessage="Solo se aceptan números enteros de 1 a 1000000" Display="Dynamic" ForeColor="Red" MinimumValue="1" MaximumValue="1000000" Type="Integer" ValidationGroup="AgregarComputadora"  />
+
+    <br />
+    <asp:Label ID="lblSistemaOperativo" runat="server" Text="Sistema Operativo"></asp:Label>
+    <asp:TextBox ID="txtSistemaOperativo" runat="server"></asp:TextBox>
+    <asp:RequiredFieldValidator ID="rfvSistemaOperativo" runat="server" ControlToValidate="txtSistemaOperativo" ErrorMessage="Campo Sistema Operativo está vació" Display="Dynamic" ForeColor="Red" ValidationGroup="AgregarComputadora"  />
+
+    <asp:TextBox ID="txtId" runat="server" Visible="false"></asp:TextBox>
     <br />
     <asp:Panel ID="Panel1" runat="server">
         <h2 style="text-align: center">Alta y Baja de Stock Computadoras</h2>
@@ -28,7 +63,6 @@
 
         <div style="text-align: center">
             <asp:Button runat="server" Text="Hecho" OnClick="Hecho_Click" Width="150px" />&nbsp;&nbsp;&nbsp;
-            <!--<asp:Button runat="server" Text="Baja" OnClick="BajaStock_Click" Width="150px" />-->
         </div>
         <br />
         <br />
@@ -45,5 +79,7 @@
             <asp:Label ID="lblResultado" runat="server" Font-Size="Medium"></asp:Label>
         </div>
         <br />
+        <asp:GridView ID="gridProductos" runat="server" AutoGenerateColumns="true"></asp:GridView>
+
     </asp:Panel>
 </asp:Content>

@@ -1,39 +1,34 @@
 ﻿
 using MySql.Data.MySqlClient;
+using System.Data.SqlClient;
 
 namespace Datos
 {
-    /*public class AltaStockCommand : OrdenCommand
-    {
-        // Constructor para realiazar la agregación
-        public AltaStockCommand(ProductoReceiver producto, double cantidad) : base(producto, cantidad)
-        {
-        }
-
-        public override void Ejecutar()
-        {
-            _producto.SumarStock(_cantidad);
-        }
-    }*/
     public class AltaStockDbCommand : DbCommand
     {
-        public AltaStockDbCommand(ProductoReceiver producto, double cantidad, MySqlConnection connection) : base(producto, cantidad, connection)
+        public AltaStockDbCommand(ProductoReceiver producto, double cantidad, SqlConnection connection) : base(producto, cantidad, connection)
         {
         }
 
         public override void Ejecutar()
         {
-            //base.Ejecutar();
             EjecutarConsulta();
         }
 
         public override void EjecutarConsulta()
         {
-            MySqlCommand command = new MySqlCommand();
+            SqlCommand command = new SqlCommand();
             command.Connection = _connection;
-            command.CommandText = "INSERT INTO stock (producto, cantidad) VALUES (@producto, @cantidad)";
-            command.Parameters.AddWithValue("@producto", _producto.Nombre);
-            command.Parameters.AddWithValue("@cantidad", _cantidad);
+            command.CommandText = "INSERT INTO computers(Marca, Modelo, Procesador, MemoriaRam, Almacenamiento, SistemaOperativo, Cantidad, AltaStock, BajaStock) VALUES(@Marca, @Modelo, @Procesador, @MemoriaRam, @Almacenamiento, @SistemaOperativo, @Cantidad, @AltaStock, @BajaStock)";
+            command.Parameters.AddWithValue("@Marca", _producto.Marca);
+            command.Parameters.AddWithValue("@Modelo", _producto.Modelo);
+            command.Parameters.AddWithValue("@Procesador", _producto.Procesador);
+            command.Parameters.AddWithValue("@MemoriaRam", _producto.MemoriaRam);
+            command.Parameters.AddWithValue("@Almacenamiento", _producto.Almacenamiento);
+            command.Parameters.AddWithValue("@SistemaOperativo", _producto.SistemaOperativo);
+            command.Parameters.AddWithValue("@Cantidad", _producto.Cantidad);
+            command.Parameters.AddWithValue("@AltaStock", _producto.AltaStock);
+            command.Parameters.AddWithValue("@BajaStock", _producto.BajaStock);
             command.ExecuteNonQuery();
         }
     }
